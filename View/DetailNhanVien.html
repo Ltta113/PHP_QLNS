@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thong tin chi tiet sinh vien</title>
+  </head>
+  <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+  </style>
+  <body>
+        <h2>Chi tiết nhân viên:</h2>
+    <table>
+        <tr>
+            <th>IDNV</th>
+            <th>Họ tên</th>
+            <th>Phòng ban</th>
+            <th>Địa chỉ</th>
+        </tr>
+        <?php
+      
+            echo "<tr>";
+            echo "<td><p><b>".$detailNV->IDNV."</b></p></td>";
+            echo "<td><p>".$detailNV->Hoten."</p></td>";
+            echo "<td><p> ".$detailNV->IDPB."</p></td>";
+            echo "<td><p> ".$detailNV->Diachi."</p></td>";
+            echo "</tr>";
+        ?>
+    </table>
+        <p><a href = "javascript:history.back()">Back</a></p>
+  </body>
+</html>

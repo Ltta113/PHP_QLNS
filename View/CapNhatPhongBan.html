@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="../Controller/PhongBanController.php?action=capnhatPB" style="
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      " method="post">
+        <div style="font-size: 25px; font-weight: 600">Cập Nhật Phòng Ban</div>
+        <div style="display: flex; flex-direction: column; gap: 10px">
+            <?php
+            echo "<div class=\"divInput\">";
+            echo "<div class=\"divInput\">";
+            echo "<label for=\"IDPB\" class=\"labelInput\" style=\"width: 80px; display: block;\">IDPB:</label>";
+            echo "<input type=\"text\" name=\"IDPB\" id=\"IDPB\" style=\"display: flex;\" value=\"" . $phongBan->IDPB . "\" readonly/>";
+            echo "</div>";
+            echo "<div class=\"divInput\">";
+            echo "<label for=\"Tenpb\" class=\"labelInput\" style=\"width: 80px; display: block;\">Tên phòng ban:</label>";
+            echo "<input type=\"text\" name=\"Tenpb\" id=\"Tenpb\" style=\"display: flex;\" value=\"" . $phongBan->Tenpb . "\"/>";
+            echo "</div>";
+            echo "<div class=\"divInput\">";
+            echo "<label for=\"Mota\" class=\"labelInput\" style=\"width: 80px; display: block;\">Mô tả:</label>";
+            echo "<input type=\"text\" name=\"Mota\" id=\"Mota\" style=\"display: flex;\" value=\"" . $phongBan->Mota . "\"/>";
+            echo "</div>";
+            ?>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0px">
+            <button class="btn" type="submit">OK</button>
+            <button class="btn">Cancel</button>
+        </div>
+    </form>
+    <p><a href = "javascript:history.back()">Back</a></p>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Danh sách nhân viên:</h2>
+    <table >
+        <?php
+        if ($listNhanVien === null) {
+            echo "Không có nhân viên";
+        } else {
+        echo"<tr>";
+        echo"<th>STT</th>";
+        echo"<th>IDNV</th>";
+        echo"<th>Name</th>";
+        echo"<th>Phòng ban</th>";
+        echo"<th>Địa chỉ</th>";
+        echo"</tr>";
+        
+        for ($i = 0; $i < sizeof($listNhanVien); $i++) {
+            echo "<tr>";
+            echo "<td>" . ($i + 1) . "</td>";
+            echo "<td>" . $listNhanVien[$i]->IDNV . "</td>";
+            echo "<td><a href='?action=getDetailNV&nvid=" . $listNhanVien[$i]->IDNV . "'>" . $listNhanVien[$i]->Hoten . "</a></td>";
+            echo "<td>" . $listNhanVien[$i]->IDPB . "</td>";
+            echo "<td>" . $listNhanVien[$i]->Diachi . "</td>";
+            echo "</tr>";
+        }
+        }
+        ?>
+    </table>
+    <br />
+    <p><a href = "javascript:history.back()">Back</a></p>
+</body>
+
+</html>

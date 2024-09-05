@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .labelInput {
+        width: 80px;
+        display: block;
+      }
+      .divInput {
+        display: flex;
+      }
+      .btn {
+        width: 60px;
+        height: 20px;
+      }
+      /* Fixed the class name for the error style */
+      .classError {
+        border: 1px solid red;
+      }
+    </style>
+    <script>
+      var listPhongBan = <?php echo json_encode($listPhongBan); ?>;
+      const checkIDPB = () => {
+        let IDPB = document.getElementById("IDPB").value;
+        let errorIDPB = document.getElementById("errorIDPB");
+        let check = true;
+        for(let i = 0; i < listPhongBan.length; i++)
+        {
+          if(listPhongBan[i].IDPB === IDPB ) check = false;
+        }
+        if(!check)
+        {
+          errorIDPB.textContent = "IDPB đã tồn tại";
+        }
+        else  errorIDPB.textContent = "";
+      }
+      const btn_OK = (event) => {
+        let IDPB = document.getElementById("IDPB").value;
+        let check = true;
+        for(let i = 0; i < listPhongBan.length; i++)
+        {
+          if(listPhongBan[i].IDPB === IDPB ) check = false;
+        }
+        if(!check)
+        {
+          alert("IDPB đã tồn tại!");
+          event.preventDefault();
+          return;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <form name="myForm"
+      action="../Controller/PhongBanController.php?action=addNewPB"
+      style="
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      "
+      method="post"
+    >
+      <div style="font-size: 25px; font-weight: 600">Chèn Phòng Ban</div>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <div class="divInput">
+          <label for="IDPB" class="labelInput">IDPB:</label>
+          <input type="text" name="IDPB" id="IDPB" oninput="checkIDPB()" required/>
+        </div>
+        <span class="error-message" style="color: red" id="errorIDPB"></span>
+        <div class="divInput">
+          <label for="Tenpb" class="labelInput">Tên phòng ban:</label>
+          <input type="text" name="Tenpb" id="Tenpb" required/>
+        </div>
+        <div class="divInput">
+        <label for="Mota" class="labelInput">Mô tả:</label>
+        <input type="text" name="Mota" id="Mota" required/>
+        </div>
+      </div>
+      <div
+        style="display: flex; align-items: center; gap: 10px; padding: 10px 0px"
+      >
+        <button class="btn" type="submit" onclick="btn_OK(event)">OK</button>
+        <button class="btn">Cancel</button>
+      </div>
+    </form>
+    <p><a href = "javascript:history.back()">Back</a></p>
+  </body>
+</html>

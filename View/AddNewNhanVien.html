@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    .labelInput {
+      width: 80px;
+      display: block;
+    }
+
+    .divInput {
+      display: flex;
+    }
+
+    .btn {
+      width: 60px;
+      height: 20px;
+    }
+
+    /* Fixed the class name for the error style */
+    .classError {
+      border: 1px solid red;
+    }
+  </style>
+  <script>
+    var listNhanVien = <? php echo json_encode($listNhanVien); ?>;
+    const checkIDNV = () => {
+      let IDNV = document.getElementById("IDNV").value;
+      let errorIDNV = document.getElementById("errorIDNV");
+      let check = true;
+      for (let i = 0; i < listNhanVien.length; i++) {
+        if (listNhanVien[i].IDNV === IDNV) check = false;
+      }
+      if (!check) {
+        errorIDNV.textContent = "IDNV đã tồn tại";
+      }
+      else errorIDNV.textContent = "";
+    }
+    const btn_OK = (event) => {
+      let IDNV = document.getElementById("IDNV").value;
+      let check = true;
+      for (let i = 0; i < listNhanVien.length; i++) {
+        if (listNhanVien[i].IDNV === IDNV) check = false;
+      }
+      if (!check) {
+        alert("IDNV đã tồn tại!");
+        event.preventDefault();
+        return;
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <form action="../Controller/NhanVienController.php?action=addNewNV" style="
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      " method="post">
+    <div style="font-size: 25px; font-weight: 600">Chèn Nhân Viên</div>
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <div class="divInput">
+        <label for="IDNV" class="labelInput">IDNV:</label>
+        <input type="text" name="IDNV" id="IDNV" oninput="checkIDNV()" required />
+      </div>
+      <span class="error-message" style="color: red" id="errorIDNV"></span>
+      <div class="divInput">
+        <label for="Hoten" class="labelInput">HoTen:</label>
+        <input type="text" name="Hoten" id="Hoten" required />
+      </div>
+      <div class="divInput">
+        <label for="IDPB" class="labelInput">IDPB:</label>
+        <?php
+          echo "<select id=\"IDPB\" name=\"IDPB\" class=\"labelInput\">";
+            for ($i = 0; $i < sizeof($listPhongBan); $i++) {
+                echo "<option value='" . $listPhongBan[$i]->IDPB . "'>" . $listPhongBan[$i]->IDPB . "</option>";
+            }
+            echo "</select>";
+          ?>
+      </div>
+      <div class="divInput">
+        <label for="Diachi" class="labelInput">Địa chỉ:</label>
+        <input type="text" name="Diachi" id="Diachi" required />
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0px">
+      <button class="btn" type="submit" onclick="btn_OK(event)">OK</button>
+      <button class="btn">Cancel</button>
+    </div>
+  </form>
+  <p><a href="javascript:history.back()">Back</a></p>
+</body>
+
+</html>
